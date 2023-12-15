@@ -310,18 +310,6 @@ class ReferenceRepository
     }
 
     /**
-     * @deprecated in favor of getIdentitiesByClass
-     *
-     * Get all stored identities
-     *
-     * @psalm-return array<string, object>
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
      * Get all stored identities
      *
      * @psalm-return array<class-string, array<string, object>>
@@ -329,18 +317,6 @@ class ReferenceRepository
     public function getIdentitiesByClass(): array
     {
         return $this->identitiesByClass;
-    }
-
-    /**
-     * @deprecated in favor of getReferencesByClass
-     *
-     * Get all stored references
-     *
-     * @psalm-return array<string, object>
-     */
-    public function getReferences()
-    {
-        return $this->references;
     }
 
     /**

@@ -32,10 +32,9 @@ class ReferenceRepositoryTest extends BaseTestCase
 
         $referenceRepo->addReference('test', $role);
 
-        $references = $referenceRepo->getReferences();
+        $references = $referenceRepo->getReferencesByClass();
         $this->assertCount(1, $references);
-        $this->assertArrayHasKey('test', $references);
-        $this->assertInstanceOf(Role::class, $references['test']);
+        $this->assertInstanceOf(Role::class, $referenceRepo->getReference('test'));
     }
 
     public function testReferenceIdentityPopulation(): void
@@ -159,7 +158,7 @@ class ReferenceRepositoryTest extends BaseTestCase
 
         $this->assertTrue($referenceRepository->hasIdentity('entity'));
         $this->assertFalse($referenceRepository->hasIdentity('invalid_entity'));
-        $this->assertEquals(['entity' => $role], $referenceRepository->getIdentities());
+        $this->assertEquals(['entity' => $role], $referenceRepository->getIdentitiesByClass());
     }
 
     public function testSetReferenceHavingIdentifier(): void
@@ -177,7 +176,7 @@ class ReferenceRepositoryTest extends BaseTestCase
         $em->flush();
 
         $referenceRepository->setReference('entity', $role);
-        $identities = $referenceRepository->getIdentities();
+        $identities = $referenceRepository->getIdentitiesByClass();
         $this->assertCount(1, $identities);
         $this->assertArrayHasKey('entity', $identities);
     }
@@ -208,7 +207,7 @@ class ReferenceRepositoryTest extends BaseTestCase
 
         $referenceRepository = new ReferenceRepository($em);
         $referenceRepository->setReference('entity', $role);
-        $identities = $referenceRepository->getIdentities();
+        $identities = $referenceRepository->getIdentitiesByClass();
 
         $this->assertEquals($identitiesExpected, $identities['entity']);
     }

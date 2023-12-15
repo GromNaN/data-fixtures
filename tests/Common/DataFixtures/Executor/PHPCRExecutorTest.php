@@ -33,9 +33,9 @@ class PHPCRExecutorTest extends BaseTestCase
             ->expects($this->once())
             ->method('transactional')
             ->with($this->isType('callable'))
-            ->will($this->returnCallback(static function ($callback) use ($dm) {
+            ->willReturnCallback(static function ($callback) use ($dm) {
                 return $callback($dm);
-            }));
+            });
 
         $executor->execute([$fixture], true);
     }
@@ -53,9 +53,9 @@ class PHPCRExecutorTest extends BaseTestCase
             ->expects($this->once())
             ->method('transactional')
             ->with($this->isType('callable'))
-            ->will($this->returnCallback(static function ($callback) use ($dm) {
+            ->willReturnCallback(static function ($callback) use ($dm) {
                 return $callback($dm);
-            }));
+            });
 
         $executor->execute([$fixture1, $fixture2], true);
     }
@@ -72,9 +72,9 @@ class PHPCRExecutorTest extends BaseTestCase
             ->expects($this->once())
             ->method('transactional')
             ->with($this->isType('callable'))
-            ->will($this->returnCallback(static function ($callback) use ($dm) {
+            ->willReturnCallback(static function ($callback) use ($dm) {
                 return $callback($dm);
-            }));
+            });
         $purger->expects($this->once())->method('purge');
 
         $executor->execute([$fixture], false);
@@ -92,9 +92,9 @@ class PHPCRExecutorTest extends BaseTestCase
             ->expects($this->once())
             ->method('transactional')
             ->with($this->isType('callable'))
-            ->will($this->returnCallback(static function ($callback) use ($dm) {
+            ->willReturnCallback(static function ($callback) use ($dm) {
                 return $callback($dm);
-            }));
+            });
         $purger->expects($this->never())->method('purge');
 
         $executor->execute([$fixture], true);

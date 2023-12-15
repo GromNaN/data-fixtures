@@ -44,11 +44,10 @@ class ProxyReferenceRepositoryTest extends BaseTestCase
         $referenceRepo = new ProxyReferenceRepository($em);
         $referenceRepo->addReference('test', $role);
 
-        $references = $referenceRepo->getReferences();
+        $references = $referenceRepo->getReferencesByClass();
 
         $this->assertCount(1, $references);
-        $this->assertArrayHasKey('test', $references);
-        $this->assertInstanceOf(self::TEST_ENTITY_ROLE, $references['test']);
+        $this->assertInstanceOf(self::TEST_ENTITY_ROLE, $referenceRepo->getReference('test'));
     }
 
     public function testReferenceIdentityPopulation(): void
